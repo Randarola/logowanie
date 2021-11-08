@@ -21,10 +21,7 @@ public class MainWindow extends JFrame {
             }
         });
     }
-   public MainWindow() throws HeadlessException {
-        this("undefined");
-   }
-    public MainWindow(String title) throws HeadlessException {
+    public MainWindow(String title) throws Exception {
         super(title);
         UsersData usersData = new UsersData();
         buildFrame(usersData.getLoginInfo());
@@ -43,14 +40,14 @@ public class MainWindow extends JFrame {
         JLabel userLoginLabel = new JLabel("Login: ");
         JLabel userPasswordLabel = new JLabel("Password: ");
         JLabel messageLabel = new JLabel();
-        setLayout(null); // czy tego potrzebuję?
+        setLayout(null);
 
-
+        //ustalanie wielkości oraz rozmieszczania przycisków
         userLoginLabel.setBounds(50,100,75,25);
         userPasswordLabel.setBounds(50,150,75,25);
-        messageLabel.setBounds(125,250,250,35);
-        messageLabel.setFont(new Font(null, Font.ITALIC, 25));
         login.setBounds(125,200,100,25);
+
+        //sprawdzanie czy użytkownik podał wprowadził dane należące do bazy
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,16 +64,19 @@ public class MainWindow extends JFrame {
                 else  getContentPane().setBackground(new Color(0xCC0000));
             }
         });
+
         cancel.setBounds(225,200,100,25);
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 userNameField.setText("");
                 userPasswordField.setText("");
+                getContentPane().setBackground(null);
             }
         });
         login.setFocusable(false);
         cancel.setFocusable(false);
+
         userNameField.setBounds(125,100,200,25);
         userPasswordField.setBounds(125,150,200,25);
 
