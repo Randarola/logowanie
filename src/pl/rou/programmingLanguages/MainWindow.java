@@ -56,6 +56,15 @@ public class MainWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String login = userNameField.getText();
                 String password = String.valueOf(userPasswordField.getPassword());
+
+                if(loginInfo.containsKey(login)){
+                    if(loginInfo.get(login).equals(password)){
+                        //ustawia kolor tła na zielony, który nie razi aż tak w oczy
+                        getContentPane().setBackground(new Color(0x00CC66));
+                    }
+                    else  getContentPane().setBackground(new Color(0xCC0000));
+                }
+                else  getContentPane().setBackground(new Color(0xCC0000));
             }
         });
         cancel.setBounds(225,200,100,25);
