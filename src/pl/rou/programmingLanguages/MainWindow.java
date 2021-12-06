@@ -4,6 +4,7 @@ package pl.rou.programmingLanguages;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 
 public class MainWindow extends JFrame {
     public static void main(String[] args) {
@@ -33,7 +34,7 @@ public class MainWindow extends JFrame {
 
         JLabel info = new JLabel("Tu będzie się znajdował komunikat odnośnie działania programu");
         JButton run = new JButton("Start");
-        JButton cancel = new JButton("Cancel");
+        JButton reset = new JButton("Reset");
 
 
         setLayout(null);
@@ -42,24 +43,27 @@ public class MainWindow extends JFrame {
         // !!!  dopasuj lepsze parametry, słabe rozmieszczenie przycisków!!!
         info.setBounds(50, 100, 400, 25);
         run.setBounds(125, 200, 100, 25);
-        cancel.setBounds(225, 200, 100, 25);
+        reset.setBounds(225, 200, 100, 25);
 
-        //sprawdzanie czy użytkownik podał wprowadził dane należące do bazy
-        run.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
+        //sprawdzanie
+        run.addMouseListener(new MouseAdapter() {
+//hmmm użytkownik ma przycisk nacisnąć czy na niego najechać?
+/*
+przy najechaniu myszą na przycisk od "złej" strony ta ucieka, jak najedziesz od dobrej strony i przyciśniesz lewy przycisk myszy, pojawia się kanwa
+ */
         });
 
 
-        cancel.addActionListener(new ActionListener() {
+        reset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //  !!! Pamiętaj o zmianie wartości x,y !!!
+                run.setLocation(125,200);
             }
         });
 
         add(info);
         add(run);
-        add(cancel);
+        add(reset);
     }
 }
