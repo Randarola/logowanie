@@ -1,10 +1,8 @@
 package pl.rou.programmingLanguages;
-//korzystam z fragmentów kodu z zajęć
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Random;
 
 public class MainWindow extends JFrame {
     public static void main(String[] args) {
@@ -27,38 +25,56 @@ public class MainWindow extends JFrame {
     }
 
     protected void buildFrame() {
-// !!!  dopasuj lepsze parametry, wyskakujące okno jest za małe !!!
-        setBounds(100, 100, 450, 300);
+        setBounds(100, 100, 900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-        JLabel info = new JLabel("Tu będzie się znajdował komunikat odnośnie działania programu");
+        JLabel info = new JLabel("Naciśnij start :)");
         JButton run = new JButton("Start");
         JButton reset = new JButton("Reset");
 
 
         setLayout(null);
 
-        //ustalanie wielkości oraz rozmieszczania przycisków
-        // !!!  dopasuj lepsze parametry, słabe rozmieszczenie przycisków!!!
-        info.setBounds(50, 100, 400, 25);
-        run.setBounds(125, 200, 100, 25);
-        reset.setBounds(225, 200, 100, 25);
+        info.setBounds(250, 100, 400, 25);
+        run.setBounds(200, 250, 100, 25);
+        reset.setBounds(500, 250, 100, 25);
 
-        //sprawdzanie
+
         run.addMouseListener(new MouseAdapter() {
-//hmmm użytkownik ma przycisk nacisnąć czy na niego najechać?
-/*
-przy najechaniu myszą na przycisk od "złej" strony ta ucieka, jak najedziesz od dobrej strony i przyciśniesz lewy przycisk myszy, pojawia się kanwa
- */
-        });
+            @Override
+            public void mouseEntered(MouseEvent event){
+                super.mouseEntered(event);
+                if(event.getX() < run.getX() - 60) {
+                    run.setLocation(new Random().nextInt(800) ,new Random().nextInt(500));
+                }
+            }
+            public void mouseClicked(MouseEvent event){
+                super.mouseClicked(event);
+                info.setVisible(false);
+                run.setVisible(false);
+                reset.setVisible(false);
 
+               remove(info);
+                remove(run);
+                remove(reset);
+
+
+                Canvas kanwa = new Canvas();
+                setBounds(100, 100, 500, 500);
+                kanwa.setFocusable(true);
+                kanwa.setVisible(true);
+
+                add(kanwa);
+                kanwa.requestFocusInWindow();
+
+            }
+        });
 
         reset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //  !!! Pamiętaj o zmianie wartości x,y !!!
-                run.setLocation(125,200);
+                run.setLocation(200,250);
             }
         });
 
